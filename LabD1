@@ -1,0 +1,63 @@
+import java.awt.*;
+import javax.swing.*;
+
+public class GUITemplate extends JFrame
+{
+    private final int WINDOW_WIDTH = 500;
+    private final int WINDOW_HEIGHT = 500;
+    private Graphics g;
+    
+    public GUITemplate()
+    {
+        setTitle("GUI Program");
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        setBackground(Color.WHITE);
+        setPreferredSize(new Dimension(500,500));
+    }
+    
+    @Override
+    public void paint(Graphics gr)
+    {
+        g = gr;
+        setVisible(true);
+        drawSquares(g, 170, 170, 160);
+    }
+    
+    private void drawSquares(Graphics g, int x, int y, int side)
+    {
+        if(side >= 10)
+        {
+            g.setColor(Color.BLACK);
+            g.drawRect(x, y, side, side);
+            g.setColor(Color.LIGHT_GRAY);
+            g.fillRect(x, y, side, side);
+            
+            drawSquares(g, x-(side/4), y-(side/4), side/2);
+            drawSquares(g, x+side-(side/4), y-(side/4), side/2);
+            drawSquares(g, x-(side/4), y+side-(side/4), side/2);
+            drawSquares(g, x+side-(side/4), y+side-(side/4), side/2);
+        }
+    }
+    public static void main(String[] args)
+    {
+        GUITemplate guiTemplate = new GUITemplate();
+    }
+    
+    @SuppressWarnings("unchecked")
+    
+    private void initComponents()
+    {
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADIN)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+    }
+}
